@@ -1,10 +1,10 @@
-# 📦 P1 - Sistema de Consulta de Produtos
+# 💻 P1 - Catálogo de Periféricos para PC
 
 ## Visão geral
 
-Este projeto foi desenvolvido em **Java + Spring Boot** para expor um **Web Service SOAP** responsável por consultar informações de produtos a partir do código informado.
+Este projeto foi desenvolvido em **Java + Spring Boot** para expor um **Web Service SOAP** responsável por consultar informações de periféricos para PC a partir do código informado.
 
-O serviço permite recuperar os dados principais do produto, como:
+O serviço permite recuperar os dados principais do item, como:
 
 - Nome
 - Descrição
@@ -15,7 +15,7 @@ O serviço permite recuperar os dados principais do produto, como:
 
 ## Objetivo
 
-Disponibilizar uma API SOAP simples e funcional para consulta de produtos, seguindo os princípios de interoperabilidade e padronização do protocolo SOAP.
+Disponibilizar uma API SOAP simples e funcional para consulta de periféricos de computador, seguindo os princípios de interoperabilidade e padronização do protocolo SOAP.
 
 ---
 
@@ -90,7 +90,7 @@ http://localhost:8081/ws
 
 6. Clique em **Send**.
 
-A resposta retornará os dados do produto solicitado.
+A resposta retornará os dados do periférico solicitado.
 
 ---
 
@@ -101,10 +101,10 @@ A resposta retornará os dados do produto solicitado.
     <SOAP-ENV:Header/>
     <SOAP-ENV:Body>
         <ns2:consultarProdutoResponse xmlns:ns2="http://cps.sp.gov.br/produtos">
-            <ns2:nome>Shape 8.0</ns2:nome>
-            <ns2:descricao>Maple Canadense</ns2:descricao>
-            <ns2:marca>Pro Model Luan de Oliveira</ns2:marca>
-            <ns2:quantidadeEstoque>6</ns2:quantidadeEstoque>
+            <ns2:nome>Teclado Mecânico RGB</ns2:nome>
+            <ns2:descricao>Switch Red, layout ABNT2</ns2:descricao>
+            <ns2:marca>Corsair</ns2:marca>
+            <ns2:quantidadeEstoque>15</ns2:quantidadeEstoque>
         </ns2:consultarProdutoResponse>
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>

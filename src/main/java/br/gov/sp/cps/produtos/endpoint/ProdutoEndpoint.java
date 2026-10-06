@@ -24,16 +24,16 @@ public class ProdutoEndpoint {
         ConsultarProdutoResponse response = new ConsultarProdutoResponse();
 
         if (request.getCodigo() == 1) {
-            response.setNome("Shape 8.0");
-            response.setDescricao("Maple Canadense");
-            response.setMarca("Pro Model Luan de Oliveira");
-            response.setQuantidadeEstoque(6);
+            response.setNome("Teclado Mecânico RGB");
+            response.setDescricao("Switch Red, layout ABNT2");
+            response.setMarca("Corsair");
+            response.setQuantidadeEstoque(15);
 
         } else if (request.getCodigo() == 2) {
-            response.setNome("Rolamento");
-            response.setDescricao("Cerâmica");
-            response.setMarca("Bronson Speed Co.");
-            response.setQuantidadeEstoque(4);
+            response.setNome("Monitor 24\u0027 Full HD");
+            response.setDescricao("IPS, 144Hz, HDMI e DisplayPort");
+            response.setMarca("AOC");
+            response.setQuantidadeEstoque(8);
 
         } else {
             response.setNome("Produto não encontrado");
