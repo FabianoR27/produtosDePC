@@ -34,7 +34,18 @@ Disponibilizar uma API SOAP simples e funcional para consulta de periféricos de
 
 Abra a pasta do projeto no VS Code.
 
-### 2. Compilar o projeto
+### 2. Configurar as credenciais WS-Security
+
+Todas as chamadas SOAP devem enviar um `UsernameToken` válido no cabeçalho WS-Security. Configure as credenciais no terminal antes de iniciar a aplicação:
+
+```powershell
+$env:WS_SECURITY_USERNAME = "admin"
+$env:WS_SECURITY_PASSWORD = "defina-uma-senha-segura"
+```
+
+As credenciais são carregadas pelas variáveis de ambiente e não ficam armazenadas no código. Configure valores próprios e mantenha-os fora do controle de versão. Em produção, use HTTPS para proteger o transporte das credenciais.
+
+### 3. Compilar o projeto
 
 No terminal, execute:
 
@@ -42,7 +53,7 @@ No terminal, execute:
 .\mvnw.cmd clean compile
 ```
 
-### 3. Iniciar o Web Service
+### 4. Iniciar o Web Service
 
 ```powershell
 .\mvnw.cmd spring-boot:run
@@ -75,11 +86,20 @@ http://localhost:8081/ws
 ```
 
 4. Na aba **Body**, selecione **RAW** e defina o tipo como **XML**.
-5. Envie a seguinte estrutura SOAP:
+5. Inclua o cabeçalho de autenticação WS-Security e envie a requisição:
 
 ```xml
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:prod="http://cps.sp.gov.br/produtos">
-    <soapenv:Header/>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:prod="http://cps.sp.gov.br/produtos"
+                  xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+    <soapenv:Header>
+        <wsse:Security soapenv:mustUnderstand="1">
+            <wsse:UsernameToken>
+                <wsse:Username>admin</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">defina-uma-senha-segura</wsse:Password>
+            </wsse:UsernameToken>
+        </wsse:Security>
+    </soapenv:Header>
     <soapenv:Body>
         <prod:consultarProdutoRequest>
             <prod:codigo>1</prod:codigo>
@@ -90,7 +110,7 @@ http://localhost:8081/ws
 
 6. Clique em **Send**.
 
-A resposta retornará os dados do periférico solicitado.
+A resposta retornará os dados do periférico solicitado. Requisições sem token ou com credenciais inválidas recebem um SOAP Fault. Um código de produto inexistente também retorna um SOAP Fault com código de cliente e a mensagem correspondente.
 
 ---
 
